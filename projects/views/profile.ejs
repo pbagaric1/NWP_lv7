@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+<head>
+    <title>Node Authentication</title>
+</head>
+<body>
+<div class="container">
+
+    <div class="page-header text-center">
+        <h1><span class="fa fa-anchor"></span> Profile Page</h1>
+        <a href="/logout" class="btn btn-default btn-sm">Logout</a>
+    </div>
+
+    <div class="row">
+        <a href="/profile/add">Dodaj novi projekt</a>
+
+        <div>
+            <h2>Voditelj na projektu:</h2>
+            <ul>
+                <% for(var i=0; i < projects.length; i++) { %>
+                    <% if (user.local.email == projects[i].voditelj) { %>
+                    <% id = projects[i]._id %>
+                    <li>Naziv: <%= projects[i].naziv_projekta %></li>
+                    <li>Opis: <%= projects[i].opis_projekta %></li>
+                    <li>Cijena: <%= projects[i].cijena_projekta %></li>
+                    <li>Obavljeni poslovi: <%= projects[i].obavljeni_poslovi %></li>
+                    <li>Voditelj: <%= projects[i].voditelj %></li>
+                    <li>Članovi: <%= projects[i].clanovi %></li>
+                    <li>Datum početka: <%= projects[i].datum_pocetak %></li>
+                    <li>Datum završetka: <%= projects[i].datum_zavrsetak %></li>
+                    <a href="/<%=projects[i]._id%>/editall" class="btn btn-default btn-sm">Uredi projekt</a>
+                    <br><br>
+                <% } } %>
+            </ul>
+        </div>
+        <div>
+            <h2>Član na projektu:</h2>
+            <ul>
+               <% for(var i=0; i < projects.length; i++) { %>
+                    <% for(var i=0; i < projects.clanoviLista.length; i++) { %>
+                        <% if (user.local.email == projects.clanoviLista[i]) { %>
+                            <% if(projects[i] != undefined) {%>
+                        <li><%= projects[i]._id %></li>
+                        <li>Naziv: <%= projects[i].naziv_projekta %></li>
+                        <li>Opis: <%= projects[i].opis_projekta %></li>
+                        <li>Cijena: <%= projects[i].cijena_projekta %></li>
+                        <li>Obavljeni poslovi: <%= projects[i].obavljeni_poslovi %></li>
+                        <li>Voditelj: <%= projects[i].voditelj %></li>
+                        <li>Članovi: <%= projects[i].clanovi %></li>
+                        <li>Datum početka: <%= projects[i].datum_pocetak %></li>
+                        <li>Datum završetka: <%= projects[i].datum_zavrsetak %></li>
+                        <a href="/<%=projects[i]._id%>/edit" class="btn btn-default btn-sm">Uredi projekt</a>
+                    <br><br>
+                <% } } } } %>
+            </ul>
+        </div>
+    </div>
+</div>
+</body>
+</html>
